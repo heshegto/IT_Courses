@@ -1,4 +1,10 @@
 [versions]
+compileSdk = "36"
+minorApiLevel = "1"
+targetSdk = "36"
+minSdk = "28"
+javaVersion = "VERSION_11"
+
 agp = "9.2.1"
 coreKtx = "1.18.0"
 junit = "4.13.2"
@@ -9,11 +15,7 @@ appcompat = "1.7.1"
 material = "1.14.0"
 jetbrainsKotlinJvm = "2.2.10"
 
-compileSdk = "36"
-minorApiLevel = "1"
-targetSdk = "36"
-minSdk = "28"
-javaVersion = "VERSION_11"
+koin = "4.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,6 +25,11 @@ material = { group = "com.google.android.material", name = "material", version.r
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+# Koin
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
