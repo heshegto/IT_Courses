@@ -1,0 +1,36 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.ITCourses" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_grey</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Surface colors. -->
+        <item name="colorSurface">@color/dark_grey</item>
+        <item name="colorSurfaceVariant">@color/light_grey</item>
+        <!-- Surface text colors. -->
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/green</item>
+        <!-- Stroke color -->
+        <item name="strokeColor">@color/stroke</item>
+        <!-- Font -->
+        <item name="fontFamily">@font/roboto</item>
+        <!-- Background color -->
+        <item name="backgroundColor">@color/dark</item>
+        <item name="android:windowBackground">?attr/backgroundColor</item>
+        <!-- Status and Navigation bar colors -->
+        <item name="android:statusBarColor">?attr/backgroundColor</item>
+        <item name="android:navigationBarColor">?attr/backgroundColor</item>
+        <!-- Color of selected text (first) and it's handlers (second) -->
+        <item name="android:textColorHighlight">?attr/colorPrimary</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorSurfaceVariant</item>
+        <item name="android:height">@dimen/biggest_gap</item>
+        <item name="android:width">@dimen/double_biggest_gap</item>
+    </style>
+</resources>

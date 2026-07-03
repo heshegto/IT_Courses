@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.bandeev.favourite_courses"
+    namespace = "com.bandeev.it_courses.favourite_courses"
     compileSdk {
         version = release(libs.versions.compileSdk.get().toInt()) {
             minorApiLevel = libs.versions.minorApiLevel.get().toInt()

@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.bandeev.authentification"
+    namespace = "com.bandeev.it_courses.authentification"
     compileSdk {
         version = release(libs.versions.compileSdk.get().toInt()) {
             minorApiLevel = libs.versions.minorApiLevel.get().toInt()

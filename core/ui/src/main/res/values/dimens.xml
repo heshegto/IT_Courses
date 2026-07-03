@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- gaps: spaces, margins, paddings -->
+    <dimen name="space_gap">4dp</dimen>
+    <dimen name="small_gap">8dp</dimen>
+    <dimen name="normal_gap">16dp</dimen>
+    <dimen name="big_gap">24dp</dimen>
+    <dimen name="bigger_gap">28dp</dimen>
+    <dimen name="biggest_gap">32dp</dimen>
+    <dimen name="double_biggest_gap">64dp</dimen>
+
+    <!-- element sizes -->
+    <dimen name="element_height">40dp</dimen>
+    <dimen name="element_width">328dp</dimen>
+    <dimen name="element_width_half">156dp</dimen>
+
+    <!-- text sizes -->
+    <dimen name="headline_text_size">28sp</dimen>
+    <dimen name="title_large_text_size">22sp</dimen>
+    <dimen name="title_medium_text_size">16sp</dimen>
+    <dimen name="body_medium_text_size">14sp</dimen>
+    <dimen name="button_text_size">14sp</dimen>
+    <dimen name="body_small_text_size">12sp</dimen>
+    <dimen name="button_small_text_size">12sp</dimen>
+    <dimen name="caption_text_size">12sp</dimen>
+
+    <!-- others -->
+    <dimen name="zero">0dp</dimen>
+    <dimen name="corner_radius">30dp</dimen>
+</resources>

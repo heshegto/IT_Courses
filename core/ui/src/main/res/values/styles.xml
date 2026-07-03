@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="App">
+        <item name="android:fontFamily">?attr/fontFamily</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <!-- Active elements -->
+    <style name="App.ActiveElement">
+        <item name="android:background">@drawable/bg_rounded_corners</item>
+
+        <item name="android:layout_height">@dimen/element_height</item>
+        <item name="android:layout_width">@dimen/zero</item>
+
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="App.ActiveElement.ImageButton">
+        <item name="android:layout_width">@dimen/element_width_half</item>
+    </style>
+
+    <style name="App.ActiveElement.Button">
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:insetBottom">@dimen/zero</item>
+        <item name="android:insetTop">@dimen/zero</item>
+    </style>
+
+    <style name="App.ActiveElement.Button.Alternative">
+        <item name="android:backgroundTint">@color/dark_grey</item>
+    </style>
+
+    <style name="App.ActiveElement.EditText">
+        <item name="android:backgroundTint">?attr/colorSecondary</item>
+        <item name="android:paddingStart">@dimen/normal_gap</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColorHint">?attr/colorOnSecondary</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <!-- Text views -->
+    <style name="App.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="App.TextView.Headline">
+        <item name="android:textSize">@dimen/headline_text_size</item>
+        <item name="android:textFontWeight">400</item>
+    </style>
+
+    <style name="App.TextView.TitleMediumText">
+        <item name="android:textSize">@dimen/title_medium_text_size</item>
+    </style>
+
+    <style name="App.TextView.BodySmallText">
+        <item name="android:textSize">@dimen/body_small_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
