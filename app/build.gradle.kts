@@ -35,10 +35,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":domain"))
     implementation(project(":core:ui"))
     implementation(project(":features:all_courses"))
     implementation(project(":features:favourite_courses"))
     implementation(project(":features:account_management"))
+    implementation(project(":features:authentification"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="log_in">Вход</string>
+    <string name="email">Email</string>
+    <string name="email_example">example@gmail.com</string>
+    <string name="password">Пароль</string>
+    <string name="password_example">Введите пароль</string>
+    <string name="no_acc">Нет аккаунта?</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="forgot_pass">Забыли пароль?</string>
+    <string name="vk_description">Переход на страницу ВК</string>
+    <string name="ok_description">Переход на страницу Однокласники</string>
+    <string name="invalid_log_in_data">Данные для входа неправильного формата</string>
+    <string name="wrong_log_in_data">Email или пароль не верны. Проверьте их и повторите позже</string>
+    <string name="browser_error">Не удалось открыть браузер</string>
+</resources>

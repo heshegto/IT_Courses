@@ -8,6 +8,7 @@ import com.bandeev.it_courses.all_courses.AllCoursesFragment
 import com.bandeev.it_courses.favourite_courses.FavouriteCoursesFragment
 import com.bandeev.it_courses.main.R
 import com.google.android.material.navigation.NavigationBarView
+import com.bandeev.it_courses.authentification.presentation.AuthentificationFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     ) {
         ALL_COURSES("ALL_COURSES", { AllCoursesFragment() }),
         FAVOURITES( "FAVOURITES", { FavouriteCoursesFragment() }),
-        ACCOUNT("ACCOUNT", { AccountManagementFragment() })
+        ACCOUNT("ACCOUNT", { AuthentificationFragment() })
     }
 
     private var activeFragment: PossibleFragment? = null

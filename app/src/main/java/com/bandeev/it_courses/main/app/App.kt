@@ -7,6 +7,9 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
+import com.bandeev.it_courses.data.di.dataModule
+import com.bandeev.it_courses.domain.di.domainModule
+import com.bandeev.it_courses.authentification.di.authModule
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -14,7 +17,9 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
             modules(
-
+                *dataModule,
+                *domainModule,
+                authModule
             )
         }
     }
