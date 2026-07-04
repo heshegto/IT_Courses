@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Icon for active status (Is favourite) -->
+    <item android:state_selected="true" android:drawable="@drawable/bookmark_filled_green" android:contentDescription="@string/delete_from_favourite_description" />
+    <!-- Icon for inactive status (Not favourite)  -->
+    <item android:drawable="@drawable/bookmark" android:contentDescription="@string/make_favourite_description" />
+</selector>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/element_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/normal_gap"
+        app:cardCornerRadius="@dimen/normal_gap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_height_half">
+
+                <ImageView
+                    android:id="@+id/top_section_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:contentDescription="@null"
+                    android:cropToPadding="false"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/imButton_favourite"
+                    android:layout_width="@dimen/bigger_gap"
+                    android:layout_height="@dimen/bigger_gap"
+                    android:layout_marginTop="@dimen/small_gap"
+                    android:layout_marginEnd="@dimen/small_gap"
+                    android:background="@drawable/bg_rounded_corners_transparent"
+                    android:contentDescription="@string/make_favourite_description"
+                    android:padding="@dimen/btn_favourite_padding"
+                    android:scaleType="centerInside"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_favourite_selector" />
+
+                <TextView
+                    android:id="@+id/tv_rate"
+                    style="@style/App.TextView.BodySmallText.FramedText"
+                    android:layout_marginStart="@dimen/small_gap"
+                    android:layout_marginBottom="@dimen/small_gap"
+                    android:drawablePadding="@dimen/space_gap"
+                    app:drawableStartCompat="@drawable/star_fill"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="5.0" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    style="@style/App.TextView.BodySmallText.FramedText"
+                    android:layout_marginStart="@dimen/small_gap"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_rate"
+                    app:layout_constraintStart_toEndOf="@+id/tv_rate"
+                    app:layout_constraintTop_toTopOf="@+id/tv_rate"
+                    tools:text="28 march 1999" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorSurface"
+                android:orientation="vertical"
+                android:padding="@dimen/normal_gap">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/App.TextView.TitleMediumText"
+                    android:layout_marginBottom="@dimen/gap_between_title_and_text"
+                    android:textAlignment="textStart"
+                    tools:text="Title example" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    style="@style/App.TextView.BodySmallText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/gap_between_text_and_price"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:minHeight="@dimen/biggest_gap"
+                    android:textAlignment="textStart"
+                    android:textStyle="normal"
+                    tools:text="Description example " />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        style="@style/App.TextView.TitleMediumText"
+                        android:layout_weight="1"
+                        tools:text="9999 $" />
+
+                    <TextView
+                        android:id="@+id/tv_more"
+                        style="@style/App.TextView.BodySmallText"
+                        android:drawablePadding="@dimen/space_gap"
+                        android:gravity="center|end"
+                        android:text="@string/more"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        app:drawableEndCompat="@drawable/arrow_right_short_fill" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

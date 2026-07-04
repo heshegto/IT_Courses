@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="App.TextView.BodySmallText.FramedText">
+        <item name="android:background">@drawable/bg_rounded_corners_transparent</item>
+        <item name="android:paddingHorizontal">@dimen/small_gap</item>
+        <item name="android:paddingVertical">@dimen/space_gap</item>
+    </style>
+</resources>

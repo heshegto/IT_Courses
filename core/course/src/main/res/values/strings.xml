@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="more">Подробнее</string>
+    <string name="make_favourite_description">Добавить урок в избранное</string>
+    <string name="delete_from_favourite_description">Удалить урок из избранного</string>
+</resources>
