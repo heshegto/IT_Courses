@@ -1,4 +1,4 @@
-package com.bandeev.it_courses.data.network
+package com.bandeev.it_courses.data.network.repository
 
 import com.bandeev.it_courses.domain.models.CourseList
 import com.bandeev.it_courses.domain.network.repository.CoursesFromNet
