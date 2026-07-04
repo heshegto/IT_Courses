@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.ITCourses">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/search_and_filter"
+        android:layout_width="@dimen/element_width"
         android:layout_height="wrap_content"
-        android:text="All Courses"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="326dp" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/search"
+            style="@style/App.ActiveElement.EditText"
+            android:layout_width="264dp"
+            android:layout_height="56dp"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="@dimen/space_gap"
+            android:drawableTint="@color/white"
+            android:hint="@string/search_courses" />
+
+        <ImageButton
+            android:id="@+id/filter"
+            style="@style/App.ActiveElement.ImageButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/light_grey"
+            android:src="@drawable/filter" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sort"
+        style="@style/App.TextView.TitleMediumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sort_by_date"
+        android:textColor="@color/green"
+        android:drawableEnd="@drawable/arrow_up_down"
+        android:drawablePadding="@dimen/space_gap"
+        app:layout_constraintEnd_toEndOf="@id/search_and_filter"
+        app:layout_constraintTop_toBottomOf="@id/search_and_filter" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcView_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sort" />
 </androidx.constraintlayout.widget.ConstraintLayout>

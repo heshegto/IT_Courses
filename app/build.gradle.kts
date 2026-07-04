@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":core:ui"))
+    implementation(project(":core:course"))
     implementation(project(":features:all_courses"))
     implementation(project(":features:favourite_courses"))
     implementation(project(":features:account_management"))

@@ -3,8 +3,7 @@ package com.bandeev.it_courses.main.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.bandeev.it_courses.account_management.AccountManagementFragment
-import com.bandeev.it_courses.all_courses.AllCoursesFragment
+import com.bandeev.it_courses.all_courses.presentation.AllCoursesFragment
 import com.bandeev.it_courses.favourite_courses.FavouriteCoursesFragment
 import com.bandeev.it_courses.main.R
 import com.google.android.material.navigation.NavigationBarView
