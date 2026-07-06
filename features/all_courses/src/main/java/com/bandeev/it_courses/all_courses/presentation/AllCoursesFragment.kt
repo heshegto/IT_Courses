@@ -43,7 +43,7 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_layout) {
         }
 
         view.findViewById<View>(R.id.sort).setOnClickListener {
-            viewModel.sortCourses()
+            viewModel.onSortCoursesClicked()
         }
     }
     override fun onHiddenChanged(hidden: Boolean) {

@@ -22,7 +22,7 @@ class AllCoursesViewModel(
 
     private val _courses = MutableStateFlow(CourseList.getEmpty())
     val courses: StateFlow<CourseList> = _courses.asStateFlow()
-    private var isSorted = false
+    private var currentSortOrder = SortOrder.NONE
 
     init {
         loadAllCourses()
@@ -35,7 +35,7 @@ class AllCoursesViewModel(
                 val result = coursesRepository.getAllCourses().courses.map { course ->
                     course.copy(hasLike = favouriteIds.contains(course.id))
                 }
-                _courses.value = CourseList(result)
+                _courses.value = sortCourses(CourseList(result))
             } catch (e: Exception) {
                 Log.e("AllCoursesViewModel", "Error loading courses", e)
             }
@@ -49,14 +49,26 @@ class AllCoursesViewModel(
         }
     }
 
-    fun sortCourses() {
-        isSorted = !isSorted
-        val currentList = _courses.value.courses
-        val sortedList = if (isSorted) {
-            currentList.sortedBy { it.publishDate }
-        } else {
-            currentList.sortedByDescending { it.publishDate }
+    fun onSortCoursesClicked() {
+        currentSortOrder = when (currentSortOrder) {
+            SortOrder.NONE -> SortOrder.ASCENDING
+            SortOrder.DESCENDING -> SortOrder.ASCENDING
+            SortOrder.ASCENDING -> SortOrder.DESCENDING
         }
-        _courses.value = CourseList(sortedList)
+        _courses.value = sortCourses(courses.value)
+    }
+
+    private fun sortCourses(courses: CourseList): CourseList {
+        return when (currentSortOrder) {
+            SortOrder.ASCENDING -> {
+                CourseList(courses.courses.sortedBy { it.publishDate })
+            }
+            SortOrder.DESCENDING -> {
+                CourseList(courses.courses.sortedByDescending { it.publishDate })
+            }
+            SortOrder.NONE -> {
+                courses
+            }
+        }
     }
 }
