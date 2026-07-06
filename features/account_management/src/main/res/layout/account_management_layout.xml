@@ -22,14 +22,6 @@
             android:layout_marginBottom="@dimen/normal_gap"
             android:text="@string/screen_placeholder"
             android:textAllCaps="true" />
-
-        <Button
-            android:id="@+id/button_loginTransition"
-            style="@style/App.ActiveElement.Button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/element_height"
-            android:paddingHorizontal="@dimen/big_gap"
-            android:text="@string/login_transition" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

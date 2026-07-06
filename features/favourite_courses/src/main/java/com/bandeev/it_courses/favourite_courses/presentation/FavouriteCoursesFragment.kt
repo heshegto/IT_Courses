@@ -18,7 +18,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class FavouriteCoursesFragment : Fragment(R.layout.favourite_couses_layout) {
+class FavouriteCoursesFragment : Fragment(R.layout.favourite_courses_layout) {
     private val viewModel: FavouriteCoursesViewModel by viewModel()
 
     private val adapter: CourseAdapter by inject {

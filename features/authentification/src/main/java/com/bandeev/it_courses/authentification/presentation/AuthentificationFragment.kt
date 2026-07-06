@@ -10,10 +10,10 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.bandeev.it_courses.authentification.R
 import com.bandeev.it_courses.domain.auth.models.LogInViaEmailData
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class AuthentificationFragment: Fragment(R.layout.authentification_layout) {
-    private val viewModel: AuthViewModel by viewModel()
+    private val viewModel: AuthViewModel by activityViewModel()
     private val btnLogin by lazy { view?.findViewById<Button>(R.id.button_logIn) }
     private val etEmail by lazy { view?.findViewById<EditText>(R.id.edit_email) }
     private val etPassword by lazy { view?.findViewById<EditText>(R.id.edit_password) }

@@ -12,16 +12,16 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavMenu"
         android:layout_width="match_parent"
         android:layout_height="@dimen/menu_heigh"
         android:background="?attr/colorSurface"
-        app:elevation="@dimen/zero"
         android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:elevation="@dimen/zero"
         app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
         app:itemGravity="top_center"
         app:labelVisibilityMode="labeled"
