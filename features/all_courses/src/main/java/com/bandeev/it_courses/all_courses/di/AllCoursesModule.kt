@@ -6,7 +6,9 @@ import org.koin.dsl.module
 val allCoursesModule = module {
     factory<AllCoursesViewModel> {
         AllCoursesViewModel(
-            coursesRepository = get()
+            coursesRepository = get(),
+            pushFavouriteUseCase = get(),
+            getFavouriteIdsUseCase = get()
         )
     }
 }

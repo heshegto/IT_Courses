@@ -12,15 +12,14 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
     compileOptions {
         val javaVersion = JavaVersion.valueOf(libs.versions.javaVersion.get())
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
-
 }
 
 dependencies {
@@ -38,5 +37,5 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.test)
+    testImplementation(libs.koin.test)
 }

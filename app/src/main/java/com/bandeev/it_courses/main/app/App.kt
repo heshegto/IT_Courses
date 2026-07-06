@@ -12,6 +12,7 @@ import com.bandeev.it_courses.data.di.dataModule
 import com.bandeev.it_courses.domain.di.domainModule
 import com.bandeev.it_courses.authentification.di.authModule
 import com.bandeev.it_courses.course.di.courseModule
+import com.bandeev.it_courses.favourite_courses.di.favouriteCoursesModule
 
 class App : Application() {
     override fun onCreate() {
@@ -24,7 +25,8 @@ class App : Application() {
                 *domainModule,
                 authModule,
                 allCoursesModule,
-                courseModule
+                courseModule,
+                favouriteCoursesModule
             )
         }
     }

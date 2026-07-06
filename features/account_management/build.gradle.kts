@@ -12,15 +12,14 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
     compileOptions {
         val javaVersion = JavaVersion.valueOf(libs.versions.javaVersion.get())
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
-
 }
 
 dependencies {

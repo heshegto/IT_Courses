@@ -6,13 +6,18 @@ import androidx.lifecycle.viewModelScope
 import com.bandeev.it_courses.domain.models.Course
 import com.bandeev.it_courses.domain.models.CourseList
 import com.bandeev.it_courses.domain.network.repository.CoursesFromNet
+import com.bandeev.it_courses.domain.storage.usecases.GetFavouriteIdsUseCase
+import com.bandeev.it_courses.domain.storage.usecases.PushFavouriteUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AllCoursesViewModel(
-    val coursesRepository: CoursesFromNet
+    val coursesRepository: CoursesFromNet,
+    val pushFavouriteUseCase: PushFavouriteUseCase,
+    val getFavouriteIdsUseCase: GetFavouriteIdsUseCase
 ) : ViewModel() {
 
     private val _courses = MutableStateFlow(CourseList.getEmpty())
@@ -26,16 +31,22 @@ class AllCoursesViewModel(
     fun loadAllCourses() {
         viewModelScope.launch {
             try {
-                _courses.value = coursesRepository.getAllCourses()
+                val favouriteIds = getFavouriteIdsUseCase.execute()
+                val result = coursesRepository.getAllCourses().courses.map { course ->
+                    course.copy(hasLike = favouriteIds.contains(course.id))
+                }
+                _courses.value = CourseList(result)
             } catch (e: Exception) {
                 Log.e("AllCoursesViewModel", "Error loading courses", e)
-            } finally {
             }
         }
     }
 
     fun onFavouriteClicked(course: Course) {
-
+        viewModelScope.launch(Dispatchers.IO) {
+            pushFavouriteUseCase.execute(course)
+            loadAllCourses()
+        }
     }
 
     fun sortCourses() {

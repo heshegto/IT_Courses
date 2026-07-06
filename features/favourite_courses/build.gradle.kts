@@ -24,6 +24,10 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:ui"))
+    implementation(project(":core:course"))
+    implementation(project(":domain"))
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
@@ -31,4 +35,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
 }

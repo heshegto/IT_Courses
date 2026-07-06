@@ -16,7 +16,6 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -27,6 +26,7 @@ android {
             }
         }
     }
+
     compileOptions {
         val javaVersion = JavaVersion.valueOf(libs.versions.javaVersion.get())
         sourceCompatibility = javaVersion
@@ -54,5 +54,5 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.test)
+    testImplementation(libs.koin.test)
 }

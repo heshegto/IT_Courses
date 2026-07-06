@@ -11,9 +11,11 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -26,7 +28,6 @@ rootProject.name = "IT Courses"
 include(":app")
 include(":data")
 include(":domain")
-include(":features")
 include(":features:all_courses")
 include(":features:favourite_courses")
 include(":features:account_management")
