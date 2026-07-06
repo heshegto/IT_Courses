@@ -116,8 +116,8 @@
 
         <View
             android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/divider_height"
             android:layout_marginTop="@dimen/biggest_gap"
             android:background="?attr/strokeColor"
             app:layout_constraintEnd_toEndOf="parent"
