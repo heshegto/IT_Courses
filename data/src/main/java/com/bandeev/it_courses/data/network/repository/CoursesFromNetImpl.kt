@@ -7,11 +7,11 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CoursesFromNetImpl: CoursesFromNet {
+class CoursesFromNetImpl(val baseUrl: String, val pathUrl: String): CoursesFromNet {
     private var cachedCourse: CourseList? = null
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://drive.usercontent.google.com/")
+        .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -20,7 +20,7 @@ class CoursesFromNetImpl: CoursesFromNet {
     override suspend fun getAllCourses(): CourseList {
         if (cachedCourse == null) {
             cachedCourse = withContext(Dispatchers.IO) {
-                productApi.getCourses("u/0/uc?id=15arTK7XT2b7Yv4BJsmDctA4Hg-BbS8-q&export=download")
+                productApi.getCourses(pathUrl)
             }
         }
         return cachedCourse!!

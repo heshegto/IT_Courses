@@ -14,6 +14,12 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://drive.usercontent.google.com/\"")
+        buildConfigField("String", "PATH_URL", "\"u/0/uc?id=15arTK7XT2b7Yv4BJsmDctA4Hg-BbS8-q&export=download\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     compileOptions {
