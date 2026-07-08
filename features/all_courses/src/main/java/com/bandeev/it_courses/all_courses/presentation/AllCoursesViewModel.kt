@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bandeev.it_courses.domain.models.Course
 import com.bandeev.it_courses.domain.models.CourseList
-import com.bandeev.it_courses.domain.network.repository.CoursesFromNet
+import com.bandeev.it_courses.domain.network.usecases.GetAllCoursesUseCase
 import com.bandeev.it_courses.domain.storage.usecases.GetFavouriteIdsUseCase
 import com.bandeev.it_courses.domain.storage.usecases.PushFavouriteUseCase
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AllCoursesViewModel(
-    val coursesRepository: CoursesFromNet,
+    val getAlCoursesUseCase: GetAllCoursesUseCase,
     val pushFavouriteUseCase: PushFavouriteUseCase,
     val getFavouriteIdsUseCase: GetFavouriteIdsUseCase
 ) : ViewModel() {
@@ -32,7 +32,7 @@ class AllCoursesViewModel(
         viewModelScope.launch {
             try {
                 val favouriteIds = getFavouriteIdsUseCase.execute()
-                val result = coursesRepository.getAllCourses().courses.map { course ->
+                val result = getAlCoursesUseCase.execute().courses.map { course ->
                     course.copy(hasLike = favouriteIds.contains(course.id))
                 }
                 _courses.value = sortCourses(CourseList(result))
