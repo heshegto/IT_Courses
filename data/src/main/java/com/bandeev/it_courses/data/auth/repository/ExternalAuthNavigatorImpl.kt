@@ -4,11 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.net.toUri
+import com.bandeev.it_courses.domain.auth.models.ExternalAuthServices
 import com.bandeev.it_courses.domain.auth.repositories.ExternalAuthNavigator
 
 class ExternalAuthNavigatorImpl(val context: Context) : ExternalAuthNavigator {
-    override fun openUrl(url: String, errorMessage: String) {
-        val intent = Intent(Intent.ACTION_VIEW, url.toUri()).apply {
+    private val authUrls = mapOf(
+        ExternalAuthServices.VK to "https://vk.com",
+        ExternalAuthServices.OK to "https://ok.ru",
+    )
+    override fun openUrl(authService: ExternalAuthServices, errorMessage: String) {
+        val intent = Intent(Intent.ACTION_VIEW, authUrls[authService]?.toUri()).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
