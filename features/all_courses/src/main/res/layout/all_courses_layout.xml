@@ -50,6 +50,21 @@
         app:layout_constraintEnd_toEndOf="@id/search_and_filter"
         app:layout_constraintTop_toBottomOf="@id/search_and_filter" />
 
+    <TextView
+        android:id="@+id/informationText"
+        style="@style/App.TextView.TitleMediumText"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
+        android:layout_marginTop="@dimen/normal_gap"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sort"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcView_main"
         android:layout_width="@dimen/zero"
@@ -58,6 +73,7 @@
         android:paddingHorizontal="@dimen/normal_gap"
         android:paddingBottom="@dimen/normal_gap"
         android:clipToPadding="false"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

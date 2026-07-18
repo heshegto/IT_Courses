@@ -19,9 +19,9 @@ class AllCoursesViewModel(
     val pushFavouriteUseCase: PushFavouriteUseCase,
     val getFavouriteIdsUseCase: GetFavouriteIdsUseCase
 ) : ViewModel() {
+    private val _uiState = MutableStateFlow<AllCoursesUiState?>(null)
+    val uiState: StateFlow<AllCoursesUiState?> = _uiState.asStateFlow()
 
-    private val _courses = MutableStateFlow(CourseList.getEmpty())
-    val courses: StateFlow<CourseList> = _courses.asStateFlow()
     private var currentSortOrder = SortOrder.NONE
 
     init {
@@ -29,14 +29,18 @@ class AllCoursesViewModel(
     }
 
     fun loadAllCourses() {
+        if (_uiState.value == null) {
+            _uiState.value = AllCoursesUiState.Loading
+        }
         viewModelScope.launch {
             try {
                 val favouriteIds = getFavouriteIdsUseCase.execute()
                 val result = getAlCoursesUseCase.execute().courses.map { course ->
                     course.copy(hasLike = favouriteIds.contains(course.id))
                 }
-                _courses.value = sortCourses(CourseList(result))
+                _uiState.value = AllCoursesUiState.Success(sortCourses(CourseList(result)))
             } catch (e: Exception) {
+                _uiState.value = AllCoursesUiState.Error
                 Log.e("AllCoursesViewModel", "Error loading courses", e)
             }
         }
@@ -55,7 +59,7 @@ class AllCoursesViewModel(
             SortOrder.DESCENDING -> SortOrder.ASCENDING
             SortOrder.ASCENDING -> SortOrder.DESCENDING
         }
-        _courses.value = sortCourses(courses.value)
+        _uiState.value = AllCoursesUiState.Success(sortCourses((uiState.value as AllCoursesUiState.Success).courses))
     }
 
     private fun sortCourses(courses: CourseList): CourseList {
