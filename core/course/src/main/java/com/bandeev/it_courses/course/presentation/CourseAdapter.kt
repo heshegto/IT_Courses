@@ -2,27 +2,28 @@ package com.bandeev.it_courses.course.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView.Adapter
+
 import com.bandeev.it_courses.course.R
 import com.bandeev.it_courses.domain.models.Course
 import com.bandeev.it_courses.domain.models.CourseList
+
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class CourseAdapter(
-    var dataSet: CourseList,
-    val onFavouriteClick: (Course) -> Unit
-) : RecyclerView.Adapter<CourseViewHolder>() {
+    var dataSet: CourseList, val onFavouriteClick: (Course) -> Unit
+) : Adapter<CourseViewHolder>() {
 
     private val formatter = DateTimeFormatter.ofPattern(
-        "d MMMM yyyy",
-        Locale.getDefault()
+        "d MMMM yyyy", Locale.getDefault()
     )
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CourseViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_course, viewGroup, false)
+        val view =
+            LayoutInflater.from(viewGroup.context).inflate(R.layout.item_course, viewGroup, false)
         return CourseViewHolder(view)
     }
 
@@ -44,9 +45,12 @@ class CourseAdapter(
     }
 
     fun updateData(newData: CourseList) {
+        val diffCallback = CourseDiffCallback(this.dataSet, newData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         this.dataSet = newData
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    override fun getItemCount() = dataSet.getSize()
+    override fun getItemCount() = dataSet.size
 }

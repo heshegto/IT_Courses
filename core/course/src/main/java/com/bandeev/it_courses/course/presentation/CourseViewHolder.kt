@@ -3,11 +3,12 @@ package com.bandeev.it_courses.course.presentation
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+
 import com.bandeev.it_courses.course.R
 import java.time.LocalDate
 
-class CourseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class CourseViewHolder(view: View) : ViewHolder(view) {
     var id: Int = -1
     val title: TextView = view.findViewById(R.id.tv_title)
     val text: TextView = view.findViewById(R.id.tv_description)
