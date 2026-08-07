@@ -9,7 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CoursesFromNetImpl(val baseUrl: String, val pathUrl: String): CoursesFromNet {
     private var cachedCourse: CourseList? = null
-
+    private var lastUpdateTime: Long = 0
+    private val cacheDuration = 5 * 60 * 1000
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
@@ -17,7 +18,8 @@ class CoursesFromNetImpl(val baseUrl: String, val pathUrl: String): CoursesFromN
 
     private val productApi: ProductApi = retrofit.create(ProductApi::class.java)
 
-    override suspend fun getAllCourses(): CourseList {
+    override suspend fun getAllCourses(forceUpdate: Boolean): CourseList {
+        cacheValidation(forceUpdate)
         if (cachedCourse == null) {
             cachedCourse = withContext(Dispatchers.IO) {
                 productApi.getCourses(pathUrl)
@@ -26,7 +28,14 @@ class CoursesFromNetImpl(val baseUrl: String, val pathUrl: String): CoursesFromN
         return cachedCourse!!
     }
 
-    fun clearCache() {
+    private fun clearCache() {
         cachedCourse = null
+    }
+
+    private fun cacheValidation(forceUpdate: Boolean = false) {
+        if (System.currentTimeMillis() - lastUpdateTime > cacheDuration || forceUpdate) {
+            lastUpdateTime = System.currentTimeMillis()
+            clearCache()
+        }
     }
 }
