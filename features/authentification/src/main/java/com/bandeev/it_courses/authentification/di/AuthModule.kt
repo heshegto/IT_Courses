@@ -8,6 +8,7 @@ val authModule = module {
     viewModel<AuthViewModel> {
         AuthViewModel(
             application = get(),
+            logInDataState = get(),
             logUseCase = get(),
             signUpUseCase = get(),
             forgotPasswordUseCase = get(),

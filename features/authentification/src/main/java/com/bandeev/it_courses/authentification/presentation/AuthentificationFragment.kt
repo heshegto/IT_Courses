@@ -44,16 +44,19 @@ class AuthentificationFragment: Fragment(R.layout.authentification_layout) {
     }
 
     private fun recoverUIState(){
-        viewModel.logInActivityDataState?.let {
+        val data = viewModel.getLogInData()
+        data?.let {
             etEmail?.setText(it.email)
             etPassword?.setText(it.password)
         }
     }
 
     private fun updateUIState() {
-        val email = etEmail?.text.toString().trim()
-        val password = etPassword?.text.toString()
-        viewModel.logInActivityDataState = LogInViaEmailData(email, password)
-        btnLogin?.isEnabled = viewModel.logInActivityDataState!!.isValid()
+        val data = LogInViaEmailData(
+            etEmail?.text.toString().trim(),
+            etPassword?.text.toString()
+        )
+        viewModel.setLogInData(data)
+        btnLogin?.isEnabled = data.isValid()
     }
 }

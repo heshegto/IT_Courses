@@ -2,6 +2,7 @@ package com.bandeev.it_courses.authentification.presentation
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import com.bandeev.it_courses.domain.auth.models.LogInResult
 import com.bandeev.it_courses.domain.auth.models.LogInViaEmailData
 import com.bandeev.it_courses.domain.auth.usecases.AuthWithOKUseCase
@@ -14,18 +15,19 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class AuthViewModel(
     application: Application,
+    private val logInDataState: SavedStateHandle,
     val logUseCase: LogInUseCase,
     val signUpUseCase: SignUpUseCase,
     val forgotPasswordUseCase: ForgotPasswordUseCase,
     val authWithOKUseCase: AuthWithOKUseCase,
     val authWithVKUseCase: AuthWithVKUseCase
 ) : AndroidViewModel(application) {
-    var logInActivityDataState: LogInViaEmailData? = null
     private val _logInResult: MutableStateFlow<LogInResult> = MutableStateFlow(LogInResult(null, false))
     val logInResult = _logInResult.asStateFlow()
 
     fun clickLogIn(logInFailedMessage: String, invalidLogInDataMessage: String) {
-        logInActivityDataState?.let {
+        val data = logInDataState.get<LogInViaEmailData>("login_data")
+        data?.let {
             _logInResult.value = logUseCase.execute(it, logInFailedMessage, invalidLogInDataMessage)
         }
     }
@@ -44,5 +46,13 @@ class AuthViewModel(
 
     fun clickAuthOK(errorMessage: String) {
         authWithOKUseCase.execute(errorMessage)
+    }
+
+    fun setLogInData(newLogInDataState: LogInViaEmailData) {
+        logInDataState["login_data"] = newLogInDataState
+    }
+
+    fun getLogInData(): LogInViaEmailData?  {
+        return logInDataState.get<LogInViaEmailData>("login_data")
     }
 }

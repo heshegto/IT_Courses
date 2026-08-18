@@ -1,6 +1,8 @@
 package com.bandeev.it_courses.domain.auth.models
 
-data class LogInViaEmailData( val email: String, val password: String) {
+import java.io.Serializable
+
+data class LogInViaEmailData( val email: String, val password: String): Serializable {
 
     fun isValid(): Boolean {
         return isEmailValid(email) && isPasswordValid(password)
