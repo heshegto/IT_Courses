@@ -1,6 +1,5 @@
 package com.bandeev.it_courses.all_courses.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bandeev.it_courses.domain.models.Course
@@ -22,26 +21,54 @@ class AllCoursesViewModel(
     private val _uiState = MutableStateFlow<AllCoursesUiState?>(null)
     val uiState: StateFlow<AllCoursesUiState?> = _uiState.asStateFlow()
 
-    private var currentSortOrder = SortOrder.NONE
-
     init {
         loadAllCourses()
     }
 
-    fun loadAllCourses() {
-        if (_uiState.value == null) {
+    fun loadAllCourses(forceUpdate: Boolean = false) {
+        if (uiState.value !is AllCoursesUiState.Success) {
             _uiState.value = AllCoursesUiState.Loading
         }
         viewModelScope.launch {
+            if (uiState.value !is AllCoursesUiState.Success) {
+                _uiState.value = AllCoursesUiState.Loading
+            }
             try {
-                val favouriteIds = getFavouriteIdsUseCase.execute()
-                val result = getAlCoursesUseCase.execute().courses.map { course ->
-                    course.copy(hasLike = favouriteIds.contains(course.id))
+                val favouriteIds: List<Int> = getFavouriteIdsUseCase.execute()
+                val result: CourseList =
+                    CourseList(getAlCoursesUseCase.execute(forceUpdate).courses.map { course ->
+                        course.copy(hasLike = favouriteIds.contains(course.id))
+                    })
+
+                if (result.isEmpty()) {
+                    _uiState.value = AllCoursesUiState.Empty
+                } else {
+                    var currentSortOrder: SortOrder = SortOrder.NONE
+                    var currentForcedUpdateCount: Int = 0
+                    if (uiState.value is AllCoursesUiState.Success) {
+                        currentSortOrder = (uiState.value as AllCoursesUiState.Success).sortOrder
+                        currentForcedUpdateCount =
+                            (uiState.value as AllCoursesUiState.Success).forcedUpdatesCount
+                        if (forceUpdate) {
+                            currentForcedUpdateCount++
+                        }
+                    }
+                    val sortedCourses = if (forceUpdate) {
+                        AllCoursesUiState.Success(
+                            result,
+                            forcedUpdatesCount = currentForcedUpdateCount
+                        )
+                    } else {
+                        AllCoursesUiState.Success.getSortedCourses(
+                            result,
+                            currentSortOrder,
+                            currentForcedUpdateCount
+                        )
+                    }
+                    _uiState.value = sortedCourses
                 }
-                _uiState.value = AllCoursesUiState.Success(sortCourses(CourseList(result)))
             } catch (e: Exception) {
                 _uiState.value = AllCoursesUiState.Error
-                Log.e("AllCoursesViewModel", "Error loading courses", e)
             }
         }
     }
@@ -54,25 +81,16 @@ class AllCoursesViewModel(
     }
 
     fun onSortCoursesClicked() {
-        currentSortOrder = when (currentSortOrder) {
-            SortOrder.NONE -> SortOrder.ASCENDING
-            SortOrder.DESCENDING -> SortOrder.ASCENDING
-            SortOrder.ASCENDING -> SortOrder.DESCENDING
-        }
-        _uiState.value = AllCoursesUiState.Success(sortCourses((uiState.value as AllCoursesUiState.Success).courses))
-    }
-
-    private fun sortCourses(courses: CourseList): CourseList {
-        return when (currentSortOrder) {
-            SortOrder.ASCENDING -> {
-                CourseList(courses.courses.sortedBy { it.publishDate })
+        if (_uiState.value !is AllCoursesUiState.Success) return
+        val newSortOrder: SortOrder =
+            when ((uiState.value as AllCoursesUiState.Success).sortOrder) {
+                SortOrder.NONE -> SortOrder.ASCENDING
+                SortOrder.DESCENDING -> SortOrder.ASCENDING
+                SortOrder.ASCENDING -> SortOrder.DESCENDING
             }
-            SortOrder.DESCENDING -> {
-                CourseList(courses.courses.sortedByDescending { it.publishDate })
-            }
-            SortOrder.NONE -> {
-                courses
-            }
-        }
+        _uiState.value = AllCoursesUiState.Success.getSortedCourses(
+            (uiState.value as AllCoursesUiState.Success),
+            newSortOrder
+        )
     }
 }

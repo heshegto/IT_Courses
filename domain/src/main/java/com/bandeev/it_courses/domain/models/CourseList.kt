@@ -16,4 +16,6 @@ data class CourseList(
     operator fun get(index: Int): Course = courses[index]
 
     operator fun contains(course: Course): Boolean = courses.contains(course)
+
+    fun isEmpty(): Boolean = courses.isEmpty()
 }

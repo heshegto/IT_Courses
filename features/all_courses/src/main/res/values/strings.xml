@@ -5,4 +5,6 @@
     <string name="loading">Загрузка …</string>
     <string name="loading_error">Ошибка загрузки</string>
     <string name="loading_error_message">Произошла ошибка. Не удалось соединиться с сервером.</string>
+    <string name="no_courses">Нет курсов</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
 </resources>

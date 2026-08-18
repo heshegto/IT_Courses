@@ -4,7 +4,7 @@ import com.bandeev.it_courses.domain.models.CourseList
 import com.bandeev.it_courses.domain.network.repository.CoursesFromNet
 
 class GetAllCoursesUseCase(val coursesFromNet: CoursesFromNet) {
-    suspend fun execute(): CourseList {
-        return coursesFromNet.getAllCourses()
+    suspend fun execute(forceUpdate: Boolean = false): CourseList {
+        return coursesFromNet.getAllCourses(forceUpdate)
     }
 }

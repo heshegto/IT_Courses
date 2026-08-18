@@ -1,6 +1,7 @@
 package com.bandeev.it_courses.all_courses.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -10,11 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bandeev.it_courses.all_courses.R
 import com.bandeev.it_courses.course.presentation.CourseAdapter
 import com.bandeev.it_courses.domain.models.Course
-import com.bandeev.it_courses.all_courses.R
-
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +34,7 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_layout) {
         super.onViewCreated(view, savedInstanceState)
         val recycleView = view.findViewById<RecyclerView>(R.id.rcView_main)
         val informationText = view.findViewById<TextView>(R.id.informationText)
+        val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         recycleView.layoutManager = LinearLayoutManager(requireContext())
         recycleView.adapter = adapter
 
@@ -42,31 +43,51 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_layout) {
                 viewModel.uiState.collect { uiState ->
                     when (uiState) {
                         is AllCoursesUiState.Loading -> {
+                            informationText.text = getString(R.string.loading)
                             informationText.visibility = View.VISIBLE
                             recycleView.visibility = View.GONE
-                            informationText.text = getString(R.string.loading)
+                        }
+
+                        is AllCoursesUiState.Empty -> {
+                            informationText.text = getString(R.string.no_courses)
+                            informationText.visibility = View.VISIBLE
+                            recycleView.visibility = View.GONE
+                            swipeRefresh.isRefreshing = false
                         }
 
                         is AllCoursesUiState.Error -> {
+                            informationText.text = getString(R.string.loading_error)
                             informationText.visibility = View.VISIBLE
                             recycleView.visibility = View.GONE
-                            informationText.text = getString(R.string.loading_error)
                             Toast.makeText(
                                 requireContext(),
                                 getString(R.string.loading_error_message),
                                 Toast.LENGTH_SHORT
                             ).show()
+                            swipeRefresh.isRefreshing = false
                         }
 
                         is AllCoursesUiState.Success -> {
                             informationText.visibility = View.GONE
                             recycleView.visibility = View.VISIBLE
                             adapter.updateData(uiState.courses)
+                            if (swipeRefresh.isRefreshing) {
+                                swipeRefresh.isRefreshing = false
+                                recycleView.post { recycleView.scrollToPosition(0) }
+                            }
                         }
 
                         else -> {
-                            informationText.visibility = View.GONE
+                            Log.e("AllCoursesFragment", "Unknown state: $uiState")
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.unknown_error),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            informationText.text = getString(R.string.unknown_error)
+                            informationText.visibility = View.VISIBLE
                             recycleView.visibility = View.GONE
+                            swipeRefresh.isRefreshing = false
                         }
                     }
                 }
@@ -75,6 +96,11 @@ class AllCoursesFragment : Fragment(R.layout.all_courses_layout) {
 
         view.findViewById<View>(R.id.sort).setOnClickListener {
             viewModel.onSortCoursesClicked()
+            recycleView.post { recycleView.scrollToPosition(0) }
+        }
+
+        swipeRefresh.setOnRefreshListener {
+            viewModel.loadAllCourses(true)
         }
     }
 

@@ -16,6 +16,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"https://drive.usercontent.google.com/\"")
         buildConfigField("String", "PATH_URL", "\"u/0/uc?id=15arTK7XT2b7Yv4BJsmDctA4Hg-BbS8-q&export=download\"")
+        buildConfigField("String", "VK_URL", "\"https://vk.com\"")
+        buildConfigField("String", "OK_URL", "\"https://ok.ru\"")
     }
 
     buildFeatures {

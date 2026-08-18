@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.ITCourses">
@@ -43,39 +41,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_gap"
+        android:drawablePadding="@dimen/space_gap"
+        android:focusable="false"
         android:text="@string/sort_by_date"
         android:textColor="@color/green"
-        android:drawablePadding="@dimen/space_gap"
         app:drawableEndCompat="@drawable/arrow_up_down"
         app:layout_constraintEnd_toEndOf="@id/search_and_filter"
         app:layout_constraintTop_toBottomOf="@id/search_and_filter" />
 
-    <TextView
-        android:id="@+id/informationText"
-        style="@style/App.TextView.TitleMediumText"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:layout_width="@dimen/zero"
-        android:layout_height="@dimen/zero"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/normal_gap"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sort"
-        />
+        app:layout_constraintTop_toBottomOf="@id/sort">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcView_main"
-        android:layout_width="@dimen/zero"
-        android:layout_height="@dimen/zero"
-        android:layout_marginTop="@dimen/normal_gap"
-        android:paddingHorizontal="@dimen/normal_gap"
-        android:paddingBottom="@dimen/normal_gap"
-        android:clipToPadding="false"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sort" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/informationText"
+                style="@style/App.TextView.TitleMediumText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcView_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/normal_gap"
+                android:paddingBottom="@dimen/normal_gap"
+                android:visibility="gone" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

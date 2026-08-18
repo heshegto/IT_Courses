@@ -39,4 +39,6 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     testImplementation(libs.koin.test)
+
+    implementation(libs.androidx.swiperefreshlayout)
 }
